@@ -1,4 +1,6 @@
 body {
+  display: flex;
+  justify-content: center;
   margin: 0 auto;
   padding: 100px 50px 50px 50px;
   font-family: 'Nexa Regular', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',

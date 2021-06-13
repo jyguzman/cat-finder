@@ -1,5 +1,5 @@
 import React from 'react';
-import { CardMedia, Button, Paper, Grid, makeStyles } from '@material-ui/core';
+import { Container, CardMedia, Button, Paper, Grid, makeStyles } from '@material-ui/core';
 import StatList from './StatList';
 import { Typography } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
@@ -7,14 +7,17 @@ import { useHistory, useParams } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
-        padding: "35px",
+        padding: "25px",
         borderRadius: "20px",
+    },
+    container: {
+        display: "flex",
+        justifyContent: "center",
         position: "relative"
     },
     content: {
-        display: "flex",
-        justifyContent: "center",
-        paddingBottom: "15px"
+        paddingBottom: "15px",
+        
     },
     media: {
         maxWidth: "550px",
@@ -42,7 +45,8 @@ const CatDetails = (props) => {
         cats.filter(cat => cat.name === name)
         .map((cat, index) => {
             return ( 
-                <Paper elevation={8} className={classes.paper} key={index}>
+                <Container className={classes.container}>
+                <Paper className={classes.paper} key={index}>
                     <Grid item container direction="row" justify="center" alignItems="center" className={classes.content}>
                         <Grid item xs={12} sm={6} md={6} lg={6} xl={6}>
                             <CardMedia className={classes.media}
@@ -70,6 +74,7 @@ const CatDetails = (props) => {
                         Back
                     </Button>
                  </Paper>
+                </Container>
             );
         })       
     )    
