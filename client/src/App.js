@@ -5,7 +5,7 @@ import CatDetails from './components/CatDetails';
 import Header from './components/Header';
 import FiltersSection from './components/FiltersSection';
 import Paginator from './components/Paginator';
-import { Container } from '@material-ui/core';
+import { makeStyles, Container } from '@material-ui/core';
 import { Route } from 'react-router-dom';
 import axios from 'axios';
 

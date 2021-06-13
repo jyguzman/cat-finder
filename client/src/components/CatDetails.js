@@ -7,17 +7,8 @@ import { useHistory, useParams } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
-        padding: "25px",
+        padding: "20px",
         borderRadius: "20px",
-    },
-    container: {
-        display: "flex",
-        justifyContent: "center",
-        position: "relative"
-    },
-    content: {
-        paddingBottom: "15px",
-        
     },
     media: {
         maxWidth: "550px",
@@ -45,7 +36,6 @@ const CatDetails = (props) => {
         cats.filter(cat => cat.name === name)
         .map((cat, index) => {
             return ( 
-                <Container className={classes.container}>
                 <Paper className={classes.paper} key={index}>
                     <Grid item container direction="row" justify="center" alignItems="center" className={classes.content}>
                         <Grid item xs={12} sm={6} md={6} lg={6} xl={6}>
@@ -74,26 +64,10 @@ const CatDetails = (props) => {
                         Back
                     </Button>
                  </Paper>
-                </Container>
+
             );
         })       
     )    
 }
-/*
-<Grid item xs={12} sm={6} md={6} lg={6} xl={6}>
-                                <List > 
-                                    <ListItem><StatBar stat={"Shedding Level"} value={cat.shedding_level} /></ListItem>
-                                    <ListItem><StatBar stat={"Friendliness with Dogs"} value={cat.dog_friendly} /></ListItem>
-                                    <ListItem><StatBar stat={"Friendliness with Children"} value={cat.child_friendly} /></ListItem>
-                                </List>
-                            </Grid>
-                            <Grid item xs={14} sm={6} md={6} lg={6}  xl={6}>
-                                    <List > 
-                                        <ListItem><StatBar stat={"Vocalization"} value={cat.vocalization} /></ListItem>
-                                        <ListItem><StatBar stat={"Energy Level"} value={cat.energy_level} /></ListItem>
-                                        <ListItem><StatBar stat={"Intelligence"} value={cat.intelligence} /></ListItem>
-                                    </List>
-                            </Grid>
-*/
 
 export default CatDetails;
