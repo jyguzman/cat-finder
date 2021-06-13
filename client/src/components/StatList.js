@@ -1,0 +1,25 @@
+import React from 'react';
+import { Grid, List, ListItem } from '@material-ui/core';
+
+import StatBar from './StatBar';
+
+
+const StatList = (props) => {
+    const stats = props.stats;
+
+    return (
+        <Grid item container xs={8} sm={6} md={6} lg={6} xl={6} justify="center">
+            <List > 
+                {
+                    stats.map((statType, index) => {
+                        return (
+                            <ListItem key={index*index}><StatBar stat={Object.keys(statType)} value={statType[Object.keys(statType)]}  /></ListItem>
+                        )
+                    })
+                }
+            </List>
+        </Grid>
+    );
+}
+
+export default StatList;
