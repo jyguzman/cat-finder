@@ -4,6 +4,7 @@ import CatCard from './CatCard'
 
 const useStyles = makeStyles((theme) => ({
     container: {
+        marginLeft: "25px"
     },
 })); 
 
@@ -15,7 +16,7 @@ const CatGallery = (props) => {
     const perPage = props.perPage;
 
     return (
-        <Container className={classes.container}>
+        <Container className="gallery">
         <Grid container justify="center" spacing={3}>
             {  
                 cats.slice((page - 1) * perPage, page * perPage)

@@ -18,7 +18,7 @@ const StyledRating = withStyles({
 
 const StatRating = (props) => {
     const classes = useStyles();
-
+    const rating = props.value;
     return (
         <Grid item container direction="column" justify="center">
             <Box component="fieldset" mb={3} borderColor="transparent">

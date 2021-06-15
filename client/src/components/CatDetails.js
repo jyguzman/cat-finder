@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, CardMedia, Button, Paper, Grid, makeStyles } from '@material-ui/core';
+import { CardMedia, Button, Paper, Grid, makeStyles } from '@material-ui/core';
 import StatList from './StatList';
 import { Typography } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';

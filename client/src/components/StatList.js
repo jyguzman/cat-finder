@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid, List, ListItem } from '@material-ui/core';
 
-import StatBar from './StatBar';
+import StatRating from './StatRating';
 
 
 const StatList = (props) => {
@@ -13,7 +13,7 @@ const StatList = (props) => {
                 {
                     stats.map((statType, index) => {
                         return (
-                            <ListItem key={index*index}><StatBar stat={Object.keys(statType)} value={statType[Object.keys(statType)]}  /></ListItem>
+                            <ListItem key={index}><StatRating stat={Object.keys(statType)} value={statType[Object.keys(statType)]}  /></ListItem>
                         )
                     })
                 }
