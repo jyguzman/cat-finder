@@ -19,7 +19,8 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: "15px",
     },
     typography: {
-        maxWidth: "450px"
+        maxWidth: "450px",
+        textAlign: "center"
     },
     list: {
         paddingLeft: "20px",
@@ -38,20 +39,21 @@ const CatDetails = (props) => {
     return (
         cat.map((cat, index) => {
             return ( 
-                <Container>
+                <Container key="container">
                     <Paper elevation={8} className={classes.paper} key={index}>
-                        <Grid item container direction="row" justify="center" alignItems="center" className={classes.content}>
-                            <Grid item xs={12} sm={6} md={6} lg={6} xl={6}>
+                        <Grid item container direction="row" justify="center" alignItems="center" className={classes.content} key="grid">
+                            <Grid item container direction="column" justify="center" xs={12} sm={6} md={6} lg={6} xl={6} key="mediagrid">
                                 <CardMedia className={classes.media}
                                     component="img"
                                     src={cat.image.url}
+                                    key="image"
                                     />
-                                <Typography className={classes.typography} variant="body1">{cat.description}</Typography> 
+                                <Typography className={classes.typography} variant="body1" key="description">{cat.description}</Typography> 
                             </Grid>
-                            <CatStats cat={cat} />                            
-                            <CatDetailsImageGallery cat={cat} key={cat.id}/>
+                            <CatStats cat={cat} key={cat.name}/>                            
                         </Grid>
-                        <Button onClick={handleClick} startIcon={<ArrowBackIcon />}>
+                        <CatDetailsImageGallery cat={cat} key={cat.id}/>
+                        <Button onClick={handleClick} startIcon={<ArrowBackIcon />} key="button">
                             Back
                         </Button>
                     </Paper>
