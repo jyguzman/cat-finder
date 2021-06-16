@@ -16,18 +16,16 @@ const CatGallery = (props) => {
     const perPage = props.perPage;
 
     return (
-        <Container className="gallery">
-        <Grid container justify="center" spacing={3}>
-            {  
-                cats.slice((page - 1) * perPage, page * perPage)
-                .map((cat, index) => {
-                    return (
-                        <CatCard cat={cat} key={index} />
-                    )
-                })
-            }
-        </Grid> 
-        </Container>
+            <Grid container item justify="center" alignItems="center" spacing={3}>
+                {  
+                    cats.slice((page - 1) * perPage, page * perPage)
+                    .map((cat, index) => {
+                        return (
+                            <CatCard cat={cat} key={index} />
+                        )
+                    })
+                }
+            </Grid> 
     );
 }
 

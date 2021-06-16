@@ -41,5 +41,6 @@ class CatAPI:
 		for result in response:
 			images.append(result['url'])
 		if breed_id == "aege": images = images[:-2] 
+		if breed_id == "abys": images = images[:-1] 
 		return {"images" : images}
 	

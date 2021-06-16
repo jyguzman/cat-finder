@@ -13,7 +13,7 @@ var qs =  require('qs');
 const useStyles = makeStyles((theme) => ({
   breedCount: {
       textAlign: "left",
-      paddingBottom: "20px"
+      paddingBottom: "20px",
   },
 }));
 
@@ -22,6 +22,7 @@ function App(props) {
   const [cats, setCats] = useState([]);
   const [filteredCats, setFilteredCats] = useState([]);
   const [filters, setFilters] = useState({});
+  
 
   const perPage = 6;
   let [page, setPage] = useState(1);
@@ -87,12 +88,15 @@ function App(props) {
     <Container className="App">
       <Header />
       <Route exact path="/">
-        <FiltersSection filters={filters} updateFilters={updateFilters} reset={Object.keys(filters).length === 0} resetFilters={resetFilters} />
-        <Container className={classes.breedCount}>
-          <Typography>{filteredCats.length} cat breeds</Typography>
-          <Divider />
-        </Container>
-        <CatGallery cats={filteredCats} page={page} perPage={perPage} />
+        <FiltersSection filters={filters} updateFilters={updateFilters} 
+          reset={Object.keys(filters).length === 0} 
+          resetFilters={resetFilters}/>
+          <Container className={classes.breedCount}>
+            <Typography>{filteredCats.length} cat breeds</Typography>
+            <Divider />
+            
+          </Container>
+          <CatGallery cats={filteredCats} page={page} perPage={perPage} />
         <Paginator 
           page={page}
           pages={Math.ceil(filteredCats.length/perPage)}

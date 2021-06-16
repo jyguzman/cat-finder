@@ -17,6 +17,15 @@ const theme = createMuiTheme({
       'Arial',
       'sans-serif'
     ].join(','),
+  },
+  overrides: {
+    MuiAccordion: {
+      root: {
+        "&::before": {
+          display: "none"
+        }
+      }
+    }
   }
 });
 
