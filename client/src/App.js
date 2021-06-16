@@ -5,19 +5,20 @@ import CatDetails from './components/CatDetails';
 import Header from './components/Header';
 import FiltersSection from './components/FiltersSection';
 import Paginator from './components/Paginator';
-import { Container } from '@material-ui/core';
+import { makeStyles, Container, Divider, Typography } from '@material-ui/core';
 import { Route } from 'react-router-dom';
 import axios from 'axios';
 var qs =  require('qs');
 
-const filterCats = (cats, filters) => {
-  for (const attribute in filters) {
-      cats = cats.filter(cat => cat[attribute] === filters[attribute]);
-  }
-  return cats;
-}
+const useStyles = makeStyles((theme) => ({
+  breedCount: {
+      textAlign: "left",
+      paddingBottom: "20px"
+  },
+}));
 
 function App(props) {
+  const classes = useStyles();
   const [cats, setCats] = useState([]);
   const [filteredCats, setFilteredCats] = useState([]);
   const [filters, setFilters] = useState({});
@@ -101,17 +102,14 @@ function App(props) {
       setPage(1);
   }, [test]);
 
-  /*useEffect(() => {
-    let filtered = filterCats(cats, filters);
-    setFilteredCats(filtered);
-  }, [filters]);*/
-
   return (
     <Container className="App">
       <Header />
       <Route exact path="/">
-        <Container>
         <FiltersSection filters={test} updateFilter2={updateFilter2} reset2={Object.keys(test).length === 0} resetFilters2={resetFilters2} />
+        <Container className={classes.breedCount}>
+          <Typography>{filteredCats.length} cat breeds</Typography>
+          <Divider />
         </Container>
         <CatGallery cats={filteredCats} page={page} perPage={perPage} />
         <Paginator 

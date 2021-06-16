@@ -12,7 +12,7 @@
 /build
 
 # misc
-.cfg
+pyenv.cfg
 .DS_Store
 .env.local
 .env.development.local
