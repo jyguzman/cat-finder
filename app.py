@@ -84,3 +84,8 @@ def get_filtered_cats():
         filters['{}'.format(filter[:-2])] = args.getlist(filter)
     cats = filter_cats(filters)
     return {"filtered_cats": cats}
+
+@app.route("/images")
+def get_images_of_breed():
+    print(request.args['id'])
+    return api.get_breed_images(request.args['id'])

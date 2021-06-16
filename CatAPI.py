@@ -32,3 +32,14 @@ class CatAPI:
 		header = {'x-api-key' : CAT_API_KEY}
 		response = requests.get(url, headers=header)
 		return {"name" : response.json()}
+
+	def get_breed_images(self, breed_id):
+		url = ('https://api.thecatapi.com/v1/images/search?breed_ids=' + breed_id + "&size=small&limit=10")
+		header = {'x-api-key' : CAT_API_KEY}
+		response = requests.get(url, headers=header).json()
+		images = []
+		for result in response:
+			images.append(result['url'])
+		if breed_id == "aege": images = images[:-2] 
+		return {"images" : images}
+	
