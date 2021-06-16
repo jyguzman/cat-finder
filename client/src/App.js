@@ -23,8 +23,6 @@ function App(props) {
   const [filteredCats, setFilteredCats] = useState([]);
   const [filters, setFilters] = useState({});
 
-  const [test, setTest] = useState({});
-
   const perPage = 6;
   let [page, setPage] = useState(1);
 
@@ -36,36 +34,20 @@ function App(props) {
     setFilters({});
   }
 
-  const resetFilters2 = () => {
-    setTest({});
-  }
-
-  const updateFilter = (filter) => {
-    if (Object.keys(filter) in filters) {
-      filters[Object.keys(filter)] = filter[Object.keys(filter)];
-      setFilters({...filters})
-    } else {
+  const updateFilters = (filter, level) => {
+    if ( !(filter in filters) ) {
       setFilters((prev) => ({
-        ...prev,
-        [Object.keys(filter)]: filter[Object.keys(filter)]
-      }));
-    }
-  }
-
-  const updateFilter2 = (filter, level) => {
-    if ( !(filter in test) ) {
-      setTest((prev) => ({
         ...prev,
         [filter]: [level]
       }));
     } else {
-        let levels = test[filter];
+        let levels = filters[filter];
         if (levels.includes(level)) {
           levels = levels.filter(lvl => lvl !== level);
         } else {
           levels.push(level);
         }
-        setTest((prev) => ({
+        setFilters((prev) => ({
           ...prev,
           [filter]: levels
         }));
@@ -85,28 +67,27 @@ function App(props) {
   useEffect(() => {
       axios.get("/filter", {
         params: {
-          grooming: test["grooming"],
-          affection_level: test['affection_level'],
-          energy_level: test["energy_level"],
-          dog_friendly: test["dog_friendly"],
-          child_friendly: test['child_friendly'],
-          vocalisation: test['vocalisation'],
+          grooming: filters["grooming"],
+          affection_level: filters['affection_level'],
+          energy_level: filters["energy_level"],
+          dog_friendly: filters["dog_friendly"],
+          child_friendly: filters['child_friendly'],
+          vocalisation: filters['vocalisation'],
         }
       })
       .then(res => {
         const namesOfFilteredCats = res.data.filtered_cats;
         const list = qs.stringify(namesOfFilteredCats, {encode:false});
-        console.log(namesOfFilteredCats.length);
         setFilteredCats(cats.filter(cat => list.includes(cat.name)));
       }).catch(err => console.log(err));
       setPage(1);
-  }, [test]);
+  }, [filters]);
 
   return (
     <Container className="App">
       <Header />
       <Route exact path="/">
-        <FiltersSection filters={test} updateFilter2={updateFilter2} reset2={Object.keys(test).length === 0} resetFilters2={resetFilters2} />
+        <FiltersSection filters={filters} updateFilters={updateFilters} reset={Object.keys(filters).length === 0} resetFilters={resetFilters} />
         <Container className={classes.breedCount}>
           <Typography>{filteredCats.length} cat breeds</Typography>
           <Divider />

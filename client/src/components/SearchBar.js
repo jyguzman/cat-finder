@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, Autocomplete, TextField } from '@material-ui/lab/Autocomplete'; 
+import { makeStyles, Paper, Autocomplete, TextField } from '@material-ui/lab/Autocomplete'; 
 import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
@@ -16,7 +16,8 @@ const SearchBar = (props) => {
         history.push("/" + value)
     }
     return (
-        <Autocomplete
+        <Paper>
+            <Autocomplete
             className={classes.list}
             options={props.breeds}
             getOptionLabel={option => option.breedName}
@@ -26,7 +27,8 @@ const SearchBar = (props) => {
                 <TextField {...params} 
                 label="Search by breed name." 
                 variant="outlined"/>}
-        />
+            />
+        </Paper>
     );
 }
 
