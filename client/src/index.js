@@ -25,6 +25,11 @@ const theme = createMuiTheme({
           display: "none"
         }
       }
+    },
+    MuiAccordionSummary: {
+      content: {
+        textAlign: "right"
+      }
     }
   }
 });

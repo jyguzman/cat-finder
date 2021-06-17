@@ -5,6 +5,8 @@ import CatDetails from './components/CatDetails';
 import Header from './components/Header';
 import FiltersSection from './components/FiltersSection';
 import Paginator from './components/Paginator';
+import CategoryImages from './components/CategoryImages';
+import GifsGallery from './components/GifsGallery';
 import { CircularProgress, makeStyles, Container, Divider, Typography } from '@material-ui/core';
 import { Route } from 'react-router-dom';
 import axios from 'axios';
@@ -22,18 +24,18 @@ function App(props) {
   const [cats, setCats] = useState([]);
   const [filteredCats, setFilteredCats] = useState([]);
   const [filters, setFilters] = useState({});
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   
 
   const perPage = 6;
-  let [page, setPage] = useState(1);
+  const [page, setPage] = useState(1);
 
   const handlePageChange = (event, value) => {
     setPage(value);
   };
 
   const resetFilters = () => {
-    setFilters({});
+    if (Object.keys(filters).length !== 0) setFilters({});
   }
 
   const updateFilters = (filter, level) => {
@@ -57,16 +59,20 @@ function App(props) {
   }
 
   useEffect(() => {
-    setLoading(true);
-    axios.get("/cats")
-    .then(res => {
-      let breeds = res.data.breeds;
-      breeds = breeds.filter(breed => "image" in breed);
-      setCats(breeds);
-      setFilteredCats(breeds);
-      setLoading(false);
-    })
-    .catch(err => console.log(err));
+
+    const getCats = async () => {
+      await axios.get("/cats")
+      .then(res => {
+        let breeds = res.data.breeds;
+        breeds = breeds.filter(breed => "image" in breed);
+        setCats(breeds);
+        setFilteredCats(breeds);
+      })
+      .catch(err => console.log(err));
+    }
+    
+    getCats();
+    setLoading(false);
   }, []);
 
   useEffect(() => {
@@ -85,8 +91,9 @@ function App(props) {
         const namesOfFilteredCats = res.data.filtered_cats;
         const list = qs.stringify(namesOfFilteredCats, {encode:false});
         setFilteredCats(cats.filter(cat => list.includes(cat.name)));
-        setLoading(false);
+        
       }).catch(err => console.log(err));
+      setLoading(false);
       setPage(1);
   }, [filters]);
 
@@ -97,12 +104,11 @@ function App(props) {
         <FiltersSection filters={filters} updateFilters={updateFilters} 
           reset={Object.keys(filters).length === 0} 
           resetFilters={resetFilters}/>
-          <Container className={classes.breedCount}>
+          {loading ? <CircularProgress /> : <Container className={classes.breedCount}>
             <Typography>{filteredCats.length} cat breeds</Typography>
             <Divider />
-            
-          </Container>
-          {loading ? <CircularProgress /> : <CatGallery cats={filteredCats} page={page} perPage={perPage} />}
+          </Container>}
+          <CatGallery cats={filteredCats} page={page} perPage={perPage} />
         <Paginator 
           page={page}
           pages={Math.ceil(filteredCats.length/perPage)}
@@ -112,6 +118,14 @@ function App(props) {
       
       <Route path ="/:name">
         <CatDetails cats={filteredCats} />
+      </Route>
+
+      <Route path="/images">
+        <CategoryImages />
+      </Route>
+
+      <Route path="/gifs">
+        <GifsGallery />
       </Route>
     </Container>
   );
