@@ -87,5 +87,12 @@ def get_filtered_cats():
 
 @app.route("/images")
 def get_images_of_breed():
-    print(request.args['id'])
     return api.get_breed_images(request.args['id'])
+
+@app.route("/category")
+def get_images_by_category():
+    return api.get_category_images(request.args['category'])
+
+@app.route("/gifs")
+def get_gifs_by_category():
+    return api.get_category_gifs(request.args['category'])

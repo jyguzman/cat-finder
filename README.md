@@ -1,4 +1,5 @@
-# CatFinder
+# Welcome to CatFinder!
 
-Welcome to CatFinder! You can search through over 60 different breeds of cats by name or
-by breed characteristics.
+Search from over 60 different breeds of cats by name or by filters.
+
+(To be done: Sign up or log in to save your favorite images and gifs)

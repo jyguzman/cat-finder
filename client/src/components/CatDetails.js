@@ -9,7 +9,7 @@ import { useHistory, useParams } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
-        padding: "20px",
+        padding: "30px",
         borderRadius: "20px",
     },
     media: {
@@ -20,7 +20,8 @@ const useStyles = makeStyles((theme) => ({
     },
     typography: {
         maxWidth: "450px",
-        textAlign: "center"
+        textAlign: "center",
+        paddingBottom: "20px"
     },
     list: {
         paddingLeft: "20px",
@@ -41,8 +42,8 @@ const CatDetails = (props) => {
             return ( 
                 <Container key="container">
                     <Paper elevation={8} className={classes.paper} key={index}>
-                        <Grid item container direction="row" justify="center" alignItems="center" className={classes.content} key="grid">
-                            <Grid item container direction="column" justify="center" xs={12} sm={6} md={6} lg={6} xl={6} key="mediagrid">
+                        <Grid item container direction="row" justify="space-around" alignItems="center" className={classes.content} key="grid">
+                            <Grid item container direction="column" justify="space-around" alignItems="center" xs={12} sm={6} md={6} lg={6} xl={6} key="mediagrid">
                                 <CardMedia className={classes.media}
                                     component="img"
                                     src={cat.image.url}

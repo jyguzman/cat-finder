@@ -15,7 +15,12 @@ const useStyles = makeStyles((theme) => ({
     },
     accordion: {
         boxShadow: "none",
+        "&.MuiAccordionSummary-content": {
+            textAlign: 'right'
+        }
     },
+    typography: {
+    }
 })); 
 
 
@@ -46,7 +51,7 @@ const CatDetailsImageGallery = (props) => {
     return (
         <Accordion onChange={handleChange} className={classes.accordion}>
             <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                <Typography align="center">{expand ? "Hide Images" : "Show Images"}</Typography>
+                <Typography className={classes.typography}>{expand ? "Hide Images" : "Show Images"}</Typography>
             </AccordionSummary>
             <AccordionDetails>
                 {loading ? <CircularProgress color="primary"/> : <Grid item container justify="center" >

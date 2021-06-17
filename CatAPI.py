@@ -43,4 +43,21 @@ class CatAPI:
 		if breed_id == "aege": images = images[:-2] 
 		if breed_id == "abys": images = images[:-1] 
 		return {"images" : images}
+
+	def get_category_images(self, category):
+		ids = {
+			"boxes": "5", "clothes": "15", "hats": "1", "sinks": "14", "space": "2", "sunglasses": "4", "ties": "7"
+		}
+		url = ('https://api.thecatapi.com/v1/images/search?category_ids=' + ids[category] + "&limit=100&mime_types=jpg,png")
+		header = {'x-api-key' : CAT_API_KEY}
+		response = requests.get(url, headers=header)
+		return {"images" : response.json()}
 	
+	def get_category_gifs(self, category):
+		ids = {
+			"boxes": "5", "clothes": "15", "hats": "1", "sinks": "14", "space": "2", "sunglasses": "4", "ties": "7"
+		}
+		url = ('https://api.thecatapi.com/v1/images/search?category_ids=' + ids[category] + "&limit=100&mime_types=gif")
+		header = {'x-api-key' : CAT_API_KEY}
+		response = requests.get(url, headers=header)
+		return {"gifs" : response.json()}
