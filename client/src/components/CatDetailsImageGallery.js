@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: 20
     },
     accordion: {
-        boxShadow: "none"
+        boxShadow: "none",
     },
 })); 
 
@@ -45,7 +45,7 @@ const CatDetailsImageGallery = (props) => {
 
     return (
         <Accordion onChange={handleChange} className={classes.accordion}>
-            <AccordionSummary expandIcon={loading ? <CircularProgress color="primary"/> : <ExpandMoreIcon />}>
+            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                 <Typography align="center">{expand ? "Hide Images" : "Show Images"}</Typography>
             </AccordionSummary>
             <AccordionDetails>

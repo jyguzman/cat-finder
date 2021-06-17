@@ -5,7 +5,7 @@ import CatDetails from './components/CatDetails';
 import Header from './components/Header';
 import FiltersSection from './components/FiltersSection';
 import Paginator from './components/Paginator';
-import { makeStyles, Container, Divider, Typography } from '@material-ui/core';
+import { CircularProgress, makeStyles, Container, Divider, Typography } from '@material-ui/core';
 import { Route } from 'react-router-dom';
 import axios from 'axios';
 var qs =  require('qs');
@@ -22,6 +22,7 @@ function App(props) {
   const [cats, setCats] = useState([]);
   const [filteredCats, setFilteredCats] = useState([]);
   const [filters, setFilters] = useState({});
+  const [loading, setLoading] = useState(false);
   
 
   const perPage = 6;
@@ -56,16 +57,20 @@ function App(props) {
   }
 
   useEffect(() => {
+    setLoading(true);
     axios.get("/cats")
     .then(res => {
       let breeds = res.data.breeds;
       breeds = breeds.filter(breed => "image" in breed);
       setCats(breeds);
       setFilteredCats(breeds);
+      setLoading(false);
     })
+    .catch(err => console.log(err));
   }, []);
 
   useEffect(() => {
+      setLoading(true);
       axios.get("/filter", {
         params: {
           grooming: filters["grooming"],
@@ -80,6 +85,7 @@ function App(props) {
         const namesOfFilteredCats = res.data.filtered_cats;
         const list = qs.stringify(namesOfFilteredCats, {encode:false});
         setFilteredCats(cats.filter(cat => list.includes(cat.name)));
+        setLoading(false);
       }).catch(err => console.log(err));
       setPage(1);
   }, [filters]);
@@ -96,7 +102,7 @@ function App(props) {
             <Divider />
             
           </Container>
-          <CatGallery cats={filteredCats} page={page} perPage={perPage} />
+          {loading ? <CircularProgress /> : <CatGallery cats={filteredCats} page={page} perPage={perPage} />}
         <Paginator 
           page={page}
           pages={Math.ceil(filteredCats.length/perPage)}
