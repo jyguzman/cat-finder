@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useMediaQuery, Grid, IconButton, Toolbar, makeStyles, AppBar, Typography, Tab, Tabs } from '@material-ui/core';
 import { useHistory, useLocation } from 'react-router-dom';
 import NavMenu from "./NavMenu";
@@ -8,12 +8,12 @@ const useStyles = makeStyles((theme) => ({
     typography: {
         marginRight: theme.spacing(5),
     },
-    root: {
-        flexGrow: 1,
-    },
     button: {
-        flexGrow: 1,
-    }, 
+        marginLeft: "auto"
+    },
+    tabs: {
+        marginLeft: "auto"
+    },
     appbar: {
         display: "flex"
     }
@@ -41,21 +41,18 @@ const Header = () => {
             setTab(3);
         else setTab(1);
     });
+
     const handleDrawer = () => {
         setOpen(prev => !prev);
     };
-    
+
     return (
         <AppBar className={classes.appbar}>
-            <Grid container justify="flex-start" alignItems="center">
-                <Grid item>
-                    <Toolbar>
-                        <Typography align="center" className={classes.typography} variant="h4">Cats</Typography>
-                    </Toolbar>
-                </Grid>
+            <Toolbar>
+                <Typography align="center" className={classes.typography} variant="h4">Cats</Typography>    
                 {smallScreen ? 
-                    <Toolbar className={classes.typography}>
-                        <IconButton
+                    <>
+                        <IconButton className={classes.button}
                             color="inherit"
                             aria-label="open drawer"
                             onClick={handleDrawer}
@@ -64,16 +61,14 @@ const Header = () => {
                             <MenuIcon />
                         </IconButton>
                         <NavMenu open={open} handleDrawer={handleDrawer} /> 
-                    </Toolbar>
+                    </>
                     :
-                    <Grid item>
-                        <Tabs value={tab}>
-                            <Tab onClick={() => { goToBreeds(); setTab(1); }} label="Breeds" value={1}/>
-                            <Tab onClick={() => { goToImages(); setTab(2); }} label="Images"  value={2}/>
-                            <Tab onClick={() => { goToGifs(); setTab(3); }} label="Gifs"  value={3}/>
-                        </Tabs>
-                    </Grid>}
-            </Grid>
+                    <Tabs value={tab} className={classes.tabs}>
+                        <Tab onClick={() => { goToBreeds(); setTab(1); }} label="Breeds" value={1}/>
+                        <Tab onClick={() => { goToImages(); setTab(2); }} label="Images"  value={2}/>
+                        <Tab onClick={() => { goToGifs(); setTab(3); }} label="Gifs"  value={3}/>
+                    </Tabs>}
+            </Toolbar>
         </AppBar>
     );
 }
