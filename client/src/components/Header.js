@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useMediaQuery, Grid, IconButton, Toolbar, makeStyles, AppBar, Typography, Tab, Tabs } from '@material-ui/core';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import NavMenu from "./NavMenu";
 import MenuIcon from "@material-ui/icons/Menu";
 
@@ -23,21 +23,27 @@ const Header = () => {
     const classes = useStyles();
 
     const history = useHistory();
+    const location = useLocation();
     const goToBreeds = () => history.push("/");
     const goToImages = () => history.push("/images");
     const goToGifs = () => history.push("/gifs");
 
     const smallScreen = useMediaQuery(theme => theme.breakpoints.down("sm"));
     const [open, setOpen] = useState(false);
+    const [tab, setTab] = useState(1);
 
+    useEffect(() => {
+        if (location.pathname === "/")
+            setTab(1);
+        else if (location.pathname === "/images")
+            setTab(2);
+        else if (location.pathname === "/gifs")
+            setTab(3);
+        else setTab(1);
+    });
     const handleDrawer = () => {
-        //setOpen(true);
         setOpen(prev => !prev);
     };
-
-    /*const handleDrawerClose = () => {
-        setOpen(false);
-    };*/
     
     return (
         <AppBar className={classes.appbar}>
@@ -61,10 +67,10 @@ const Header = () => {
                     </Toolbar>
                     :
                     <Grid item>
-                        <Tabs >
-                            <Tab onClick={goToBreeds} label="Breeds" />
-                            <Tab onClick={goToImages} label="Images"  />
-                            <Tab onClick={goToGifs} label="Gifs"  />
+                        <Tabs value={tab}>
+                            <Tab onClick={() => { goToBreeds(); setTab(1); }} label="Breeds" value={1}/>
+                            <Tab onClick={() => { goToImages(); setTab(2); }} label="Images"  value={2}/>
+                            <Tab onClick={() => { goToGifs(); setTab(3); }} label="Gifs"  value={3}/>
                         </Tabs>
                     </Grid>}
             </Grid>
