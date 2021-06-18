@@ -84,8 +84,6 @@ const BreedSearchPage = (props) => {
             pages={Math.ceil(filteredCats.length/perPage)}
             handlePageChange={handlePageChange}
             />
-
-            
         </Container>
     );
 }

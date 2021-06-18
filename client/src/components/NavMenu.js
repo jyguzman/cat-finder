@@ -10,6 +10,7 @@ const NavMenu = (props) => {
     const goToBreeds = () => history.push("/");
     const goToImages = () => history.push("/images");
     const goToGifs = () => history.push("/gifs");
+    const goToSignUp = () => history.push("/signup");
 
     const handleClick = (event) => {
         const targetText = event.currentTarget.textContent;
@@ -20,6 +21,8 @@ const NavMenu = (props) => {
             goToImages();
         if (targetText === "Gifs")
             goToGifs();
+        if (targetText === "Sign Up")
+            goToSignUp();
     }
 
     return (   
@@ -33,7 +36,7 @@ const NavMenu = (props) => {
                     <ChevronLeftIcon />
                 </IconButton>
                 <List >
-                    {['Breeds', 'Images', 'Gifs'].map((text, index) => (
+                    {['Breeds', 'Images', 'Gifs', 'Sign Up'].map((text, index) => (
                         <ListItem onClick={(event) => handleClick(event)} button key={text}>
                         <ListItemText primary={text} />
                         </ListItem>

@@ -7,6 +7,7 @@ import FiltersSection from './components/FiltersSection';
 import Paginator from './components/Paginator';
 import CategoryImages from './components/CategoryImages';
 import GifsGallery from './components/GifsGallery';
+import SignUp from './components/SignUp';
 import { CircularProgress, makeStyles, Container, Divider, Typography } from '@material-ui/core';
 import { Route } from 'react-router-dom';
 import axios from 'axios';
@@ -126,6 +127,10 @@ function App(props) {
 
       <Route path="/gifs">
         <GifsGallery />
+      </Route>
+
+      <Route path="/signup">
+        <SignUp />
       </Route>
     </Container>
   );

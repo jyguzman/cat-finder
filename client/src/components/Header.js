@@ -27,6 +27,7 @@ const Header = () => {
     const goToBreeds = () => history.push("/");
     const goToImages = () => history.push("/images");
     const goToGifs = () => history.push("/gifs");
+    const goToSignUp = () => history.push("/signup");
 
     const smallScreen = useMediaQuery(theme => theme.breakpoints.down("sm"));
     const [open, setOpen] = useState(false);
@@ -39,6 +40,8 @@ const Header = () => {
             setTab(2);
         else if (location.pathname === "/gifs")
             setTab(3);
+        else if (location.pathname === "/signup")
+            setTab(4);
         else setTab(1);
     });
 
@@ -67,6 +70,7 @@ const Header = () => {
                         <Tab onClick={() => { goToBreeds(); setTab(1); }} label="Breeds" value={1}/>
                         <Tab onClick={() => { goToImages(); setTab(2); }} label="Images"  value={2}/>
                         <Tab onClick={() => { goToGifs(); setTab(3); }} label="Gifs"  value={3}/>
+                        <Tab onClick={() => { goToSignUp(); setTab(4); }} label="Sign Up"  value={4}/>
                     </Tabs>}
             </Toolbar>
         </AppBar>

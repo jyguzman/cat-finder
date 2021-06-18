@@ -10,6 +10,10 @@ const useStyles = makeStyles((theme) => ({
         maxHeight: 250,
         borderRadius: 20
     },
+    header: {
+        padding: 30,
+        margin: 30
+    },
     sadCat: {
         maxWidth: 600,
         maxHeight: 600,
@@ -70,6 +74,11 @@ const GifsGallery = () => {
     return (
         <>
             <Grid container direction="column" justify="center" alignItems="center">
+                <Grid item>
+                    <Paper elevation={4} className={classes.header}>
+                        <Typography variant="h5"> Search for gifs by cateogory. </Typography>
+                    </Paper>
+                </Grid>
                 <Grid item> 
                     <SearchBar options={categories} searchType="gifs" fetchGifs={fetchGifs}/> 
                 </Grid>
