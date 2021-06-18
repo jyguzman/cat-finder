@@ -34,9 +34,10 @@ const CategoryImages = () => {
         {label: "space"}
     ]
 
+    const perPage = 9;
     const [page, setPage] = useState(1);
-    const [perPage, setPerPage] = useState(9);
-    
+    //const [perPage, setPerPage] = useState(9);
+
     const handlePageChange = (event, value) => {
         setPage(value);
     };

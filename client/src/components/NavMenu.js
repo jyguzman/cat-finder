@@ -6,11 +6,13 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
 const NavMenu = (props) => {
+    const user = props.user;
     const history = useHistory();
     const goToBreeds = () => history.push("/");
     const goToImages = () => history.push("/images");
     const goToGifs = () => history.push("/gifs");
-    const goToSignUp = () => history.push("/signup");
+    const goToSignIn = () => history.push("/signin");
+    const goToSignOut = () => history.push("/signout");
 
     const handleClick = (event) => {
         const targetText = event.currentTarget.textContent;
@@ -21,8 +23,10 @@ const NavMenu = (props) => {
             goToImages();
         if (targetText === "Gifs")
             goToGifs();
-        if (targetText === "Sign Up")
-            goToSignUp();
+        if (targetText === "Sign In")
+            goToSignIn();
+        if (targetText === "Sign Out")
+            goToSignOut();
     }
 
     return (   
@@ -36,7 +40,7 @@ const NavMenu = (props) => {
                     <ChevronLeftIcon />
                 </IconButton>
                 <List >
-                    {['Breeds', 'Images', 'Gifs', 'Sign Up'].map((text, index) => (
+                    {['Breeds', 'Images', 'Gifs', user != null ? 'Sign Out' : 'Sign In'].map((text, index) => (
                         <ListItem onClick={(event) => handleClick(event)} button key={text}>
                         <ListItemText primary={text} />
                         </ListItem>

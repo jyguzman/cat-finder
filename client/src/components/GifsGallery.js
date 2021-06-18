@@ -53,7 +53,7 @@ const GifsGallery = () => {
         {label: "space"}
     ]
 
-    const perPage = 10;
+    const perPage = 9;
     const [page, setPage] = useState(1);
 
     const handlePageChange = (event, value) => {

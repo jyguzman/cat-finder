@@ -7,10 +7,12 @@ import FiltersSection from './components/FiltersSection';
 import Paginator from './components/Paginator';
 import CategoryImages from './components/CategoryImages';
 import GifsGallery from './components/GifsGallery';
-import SignUp from './components/SignUp';
+import SignIn from './components/SignIn';
+import SignOut from './components/SignOut';
 import { CircularProgress, makeStyles, Container, Divider, Typography } from '@material-ui/core';
 import { Route } from 'react-router-dom';
 import axios from 'axios';
+import firebase from 'firebase';
 var qs =  require('qs');
 
 const useStyles = makeStyles((theme) => ({
@@ -26,7 +28,13 @@ function App(props) {
   const [filteredCats, setFilteredCats] = useState([]);
   const [filters, setFilters] = useState({});
   const [loading, setLoading] = useState(true);
-  
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    firebase.auth().onAuthStateChanged((user) => {
+      setUser(user);
+    })
+  })
 
   const perPage = 6;
   const [page, setPage] = useState(1);
@@ -60,7 +68,6 @@ function App(props) {
   }
 
   useEffect(() => {
-
     const getCats = async () => {
       await axios.get("/cats")
       .then(res => {
@@ -100,7 +107,7 @@ function App(props) {
 
   return (
     <Container className="App">
-      <Header />
+      <Header user={user}/>
       <Route exact path="/">
         <FiltersSection filters={filters} updateFilters={updateFilters} 
           reset={Object.keys(filters).length === 0} 
@@ -129,9 +136,14 @@ function App(props) {
         <GifsGallery />
       </Route>
 
-      <Route path="/signup">
-        <SignUp />
+      <Route path="/signin">
+        <SignIn />
       </Route>
+
+      <Route path="/signout">
+        <SignOut />
+      </Route>
+      
     </Container>
   );
 }
