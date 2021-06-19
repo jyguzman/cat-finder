@@ -8,11 +8,10 @@ import { IconButton, Button} from "@material-ui/core";
 const FavoriteButton = (props) => {
     const db = firebase.firestore();
     const cat = props.cat;
-    const image = props.image;
     const [filled, setFilled] = useState(false);
     const user = props.user;
 
-    const favorite = async () => {
+    const handleClick = async () => {
         if (filled) {
             props.unfavorite();
         } else {
@@ -21,9 +20,9 @@ const FavoriteButton = (props) => {
     };
 
     return (
-            <IconButton onClick={() => {favorite(); setFilled(prev => !prev);}}>
+            user != null ? <IconButton onClick={() => {handleClick(); setFilled(prev => !prev);}}>
                 {filled ? <FavoriteIcon /> : <FavoriteBorderIcon />}
-            </IconButton> 
+            </IconButton> : null
         );
 }
 

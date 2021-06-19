@@ -38,7 +38,7 @@ const Header = (props) => {
         if (location.pathname === "/") setTab(1);
         else if (location.pathname === "/images") setTab(2);
         else if (location.pathname === "/gifs") setTab(3);
-        else if (location.pathname === "/signup" || location.pathname === "/signout") setTab(4);
+        else if (location.pathname === "/signin" || location.pathname === "/signout") setTab(4);
         else setTab(1);
     }, [location.pathname]);
 

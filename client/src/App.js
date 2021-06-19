@@ -9,8 +9,10 @@ import CategoryImages from './components/CategoryImages';
 import GifsGallery from './components/GifsGallery';
 import SignIn from './components/SignIn';
 import SignOut from './components/SignOut';
+import ShowFavoritesCheckbox from './components/ShowFavoritesCheckbox';
 import SearchBar from './components/SearchBar';
 import { CircularProgress, makeStyles, Container, Divider, Typography, Grid, Paper } from '@material-ui/core';
+import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
 import { Route } from 'react-router-dom';
 import axios from 'axios';
 import firebase from 'firebase';
@@ -20,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   breedCount: {
       textAlign: "left",
       paddingBottom: "20px",
-  },
+  }
 }));
 
 function App(props) {
@@ -33,6 +35,7 @@ function App(props) {
   const [user, setUser] = useState(null);
   const [favoriteBreeds, setFavoriteBreeds] = useState([]);
   const [favoriteImages, setFavoriteImages] = useState([]);
+  const [showFavorites, setShowFavorites] = useState(false);
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
@@ -58,6 +61,10 @@ function App(props) {
       }
     }).catch(err => console.log(err));
   };
+
+  const handleShowFavorites = () => {
+    setShowFavorites(prev => !prev);
+  }
 
   const perPage = 6;
   const [page, setPage] = useState(1);
@@ -106,8 +113,8 @@ function App(props) {
     setLoading(false);
   }, []);
 
-  useEffect(() => {
-      setLoading(true);
+  const filterCats = () => {
+    setLoading(true);
       axios.get("/filter", {
         params: {
           grooming: filters["grooming"],
@@ -126,20 +133,48 @@ function App(props) {
       }).catch(err => console.log(err));
       setLoading(false);
       setPage(1);
-  }, [filters]);
+  }
+
+  useEffect(() => {
+    setLoading(true);
+    axios.get("/filter", {
+      params: {
+        grooming: filters["grooming"],
+        affection_level: filters['affection_level'],
+        energy_level: filters["energy_level"],
+        dog_friendly: filters["dog_friendly"],
+        child_friendly: filters['child_friendly'],
+        vocalisation: filters['vocalisation'],
+      }
+    })
+    .then(res => {
+      const namesOfFilteredCats = res.data.filtered_cats;
+      const list = qs.stringify(namesOfFilteredCats, {encode:false});
+      if (showFavorites)
+        setFilteredCats(cats.filter(cat => list.includes(cat.name) && favoriteBreeds.includes(cat.id)));
+      else setFilteredCats(cats.filter(cat => list.includes(cat.name)));
+      
+    }).catch(err => console.log(err));
+    setLoading(false);
+    setPage(1);
+}, [filters, showFavorites]);
 
   return (
     <Container className="App">
       <Header user={user}/>
+
       <Route exact path="/">
         <FiltersSection filters={filters} updateFilters={updateFilters} 
           reset={Object.keys(filters).length === 0} 
           resetFilters={resetFilters}/>
-          {loading ? <CircularProgress /> : <Container className={classes.breedCount}>
-            <Typography>{filteredCats.length} cat breeds</Typography>
-            <Divider />
+        {loading ? <CircularProgress /> : <Container className={classes.breedCount}>
+          <Grid container justify="space-between" alignItems="center">
+            <Grid item><Typography>{filteredCats.length} cat breeds</Typography></Grid>
+            {user != null ? <Grid item><ShowFavoritesCheckbox handleShowFavorites={handleShowFavorites}/></Grid> : null}
+          </Grid>
+          <Divider />
           </Container>}
-          <CatGallery user={user} favoriteBreeds={favoriteBreeds} cats={filteredCats} page={page} perPage={perPage} />
+        <CatGallery user={user} favoriteBreeds={favoriteBreeds} cats={filteredCats} page={page} perPage={perPage} />
         <Paginator 
           page={page}
           pages={Math.ceil(filteredCats.length/perPage)}

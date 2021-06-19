@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import firebase from 'firebase';
-import { Card, CardMedia, CardContent, CardActions, Grid, Typography, makeStyles, Paper } from '@material-ui/core';
+import { Divider, Card, CardMedia, CardContent, CardActions, Grid, Typography, makeStyles, Paper } from '@material-ui/core';
 import LearnMoreButton from './LearnMoreButton';
 import FavoriteButton from './FavoriteButton';
 import UnfavoriteButton from './UnfavoriteButton';
@@ -31,9 +31,9 @@ const CatCard = (props) => {
     const favorite = async () => {
         const ref = db.collection("Users").doc(user.email);
         await ref.get().then((doc) => {
-                const res = ref.update({
-                    favBreeds: firebase.firestore.FieldValue.arrayUnion(cat.id)
-                });
+            const res = ref.update({
+                favBreeds: firebase.firestore.FieldValue.arrayUnion(cat.id)
+            });
         })
         .catch(err => console.log(err))
     }
@@ -41,9 +41,9 @@ const CatCard = (props) => {
     const unfavorite = async () => {
         const ref = db.collection("Users").doc(user.email);
         await ref.get().then((doc) => {
-                const res = ref.update({
-                    favBreeds: firebase.firestore.FieldValue.arrayRemove(cat.id)
-                });
+            const res = ref.update({
+                favBreeds: firebase.firestore.FieldValue.arrayRemove(cat.id)
+            });
         })
         .catch(err => console.log(err))
     }
@@ -59,6 +59,7 @@ const CatCard = (props) => {
                     <Typography variant="h5" paragraph gutterBottom>{cat.name}</Typography>
                     <Typography variant="body1" color="textSecondary" gutterBottom>{cat.temperament}</Typography>
                 </CardContent>
+                <Divider variant="middle"/>
                 <CardActions>
                     <Grid container direction="row" justify="center" alignItems="center" spacing={4}>
                         <Grid item><LearnMoreButton cat={cat} /></Grid>
