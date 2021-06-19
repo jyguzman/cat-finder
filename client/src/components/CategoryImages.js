@@ -70,7 +70,8 @@ const CategoryImages = () => {
                         .map((image, index) => {
                             return (
                                 <Grid item xs={12} sm={6} md={6} lg={4} key={index}>
-                                    <CardMedia className={classes.media}
+                                    <CardMedia 
+                                        className={classes.media}
                                         component="img"
                                         src={image.url}
                                         key={index + image.url}

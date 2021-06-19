@@ -26,6 +26,7 @@ const SearchBar = (props) => {
         }
         if (searchType === "gifs") {
             props.fetchGifs(value['label']);
+            console.log(value['label']);
         }
     }
 

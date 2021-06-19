@@ -35,17 +35,12 @@ const Header = (props) => {
     const [tab, setTab] = useState(1);
 
     useEffect(() => {
-        console.log("hey");
-        if (location.pathname === "/")
-            setTab(1);
-        else if (location.pathname === "/images")
-            setTab(2);
-        else if (location.pathname === "/gifs")
-            setTab(3);
-        else if (location.pathname === "/signup" || location.pathname === "/signout")
-            setTab(4);
+        if (location.pathname === "/") setTab(1);
+        else if (location.pathname === "/images") setTab(2);
+        else if (location.pathname === "/gifs") setTab(3);
+        else if (location.pathname === "/signup" || location.pathname === "/signout") setTab(4);
         else setTab(1);
-    });
+    }, [location.pathname]);
 
     const handleDrawer = () => {
         setOpen(prev => !prev);

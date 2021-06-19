@@ -1,5 +1,4 @@
 import React from 'react';
-import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import firebase from 'firebase';
 import { firebaseConfig } from '../firebase/firebase'
 import { makeStyles, Paper, Typography, Button, Grid } from '@material-ui/core';
@@ -31,8 +30,8 @@ const SignOut = () => {
                 <Typography varitant="body2">You can now save all of your favorite cats.</Typography>
             </Paper>
             <Grid container justify="center" spacing={4}>
-                <Grid item><Button variant="contained" onClick={() => {handleSignOut(); goToBreeds();}}>Sign Out</Button></Grid>
-                <Grid item><Button variant="contained">Favorites</Button></Grid>
+                <Grid item><Button color="secondary" variant="contained" onClick={() => {handleSignOut(); goToBreeds();}}>Sign Out</Button></Grid>
+                <Grid item><Button color="primary" variant="contained">Favorites</Button></Grid>
             </Grid>
         </>
     );

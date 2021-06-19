@@ -9,7 +9,8 @@ import CategoryImages from './components/CategoryImages';
 import GifsGallery from './components/GifsGallery';
 import SignIn from './components/SignIn';
 import SignOut from './components/SignOut';
-import { CircularProgress, makeStyles, Container, Divider, Typography } from '@material-ui/core';
+import SearchBar from './components/SearchBar';
+import { CircularProgress, makeStyles, Container, Divider, Typography, Grid, Paper } from '@material-ui/core';
 import { Route } from 'react-router-dom';
 import axios from 'axios';
 import firebase from 'firebase';
@@ -23,18 +24,40 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function App(props) {
+  const db = firebase.firestore();
   const classes = useStyles();
   const [cats, setCats] = useState([]);
   const [filteredCats, setFilteredCats] = useState([]);
   const [filters, setFilters] = useState({});
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
+  const [favoriteBreeds, setFavoriteBreeds] = useState([]);
+  const [favoriteImages, setFavoriteImages] = useState([]);
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
       setUser(user);
+      if (user != null) getFavoriteBreeds(user.email);
     })
-  })
+  }, []);
+
+  const getFavoriteBreeds = (email) => {
+    const ref = db.collection("Users").doc(email);
+    ref.get().then((doc) => {
+      if (doc.exists) {
+        setFavoriteBreeds(doc.data().favBreeds);
+      }
+    }).catch(err => console.log(err));
+  };
+
+  const getFavoriteImages = (user) => {
+    const ref = db.collection("Users").doc(user.email);
+    ref.get().then((doc) => {
+      if (doc.exists) {
+        setFavoriteImages(doc.data().favImages);
+      }
+    }).catch(err => console.log(err));
+  };
 
   const perPage = 6;
   const [page, setPage] = useState(1);
@@ -116,7 +139,7 @@ function App(props) {
             <Typography>{filteredCats.length} cat breeds</Typography>
             <Divider />
           </Container>}
-          <CatGallery cats={filteredCats} page={page} perPage={perPage} />
+          <CatGallery user={user} favoriteBreeds={favoriteBreeds} cats={filteredCats} page={page} perPage={perPage} />
         <Paginator 
           page={page}
           pages={Math.ceil(filteredCats.length/perPage)}
@@ -143,7 +166,7 @@ function App(props) {
       <Route path="/signout">
         <SignOut />
       </Route>
-      
+
     </Container>
   );
 }

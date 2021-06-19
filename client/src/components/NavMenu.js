@@ -16,7 +16,6 @@ const NavMenu = (props) => {
 
     const handleClick = (event) => {
         const targetText = event.currentTarget.textContent;
-
         if (targetText === "Breeds")
             goToBreeds();
         if (targetText === "Images")

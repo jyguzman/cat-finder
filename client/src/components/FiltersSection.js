@@ -38,7 +38,7 @@ const FiltersSection = (props) => {
     }
 
     return (
-        <Grid container justify="center" alignItems="center" xs={12}>
+        <Grid container justify="center" alignItems="center">
             <Typography className={classes.typography} variant="h4">Filter Breeds</Typography>
             <Grid item container direction="column" justify="center" alignItems="center" spacing={1}>
                 <Grid container item direction="row" justify="center" alignItems="center" item xs={12} sm={12} md={12} lg={12} >
