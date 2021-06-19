@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { Drawer, List, ListItem, ListItemText, MenuItem, Button, IconButton } from '@material-ui/core';
-import MenuIcon from "@material-ui/icons/Menu";
+import { Drawer, List, ListItem, ListItemText, IconButton } from '@material-ui/core';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
 const NavMenu = (props) => {
     const user = props.user;

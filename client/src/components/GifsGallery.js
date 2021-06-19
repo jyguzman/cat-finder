@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Typography, makeStyles, Paper, CardMedia, CircularProgress, Grid } from "@material-ui/core";
 import Paginator from './Paginator';
 import axios from 'axios';

@@ -1,9 +1,8 @@
 import React from 'react';
 import { Container, CardMedia, Button, Paper, Grid, makeStyles } from '@material-ui/core';
-import StatList from './StatList';
 import CatStats from './CatStats';
 import CatDetailsImageGallery from './CatDetailsImageGallery';
-import { Divider, Typography } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { useHistory, useParams } from 'react-router-dom';
 

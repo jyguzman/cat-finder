@@ -1,6 +1,6 @@
 import React , { useState } from 'react';
 import Filter from './Filter';
-import { makeStyles, Grid, Container, Button, Typography} from '@material-ui/core';
+import { makeStyles, Grid, Button, Typography} from '@material-ui/core';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
@@ -41,7 +41,7 @@ const FiltersSection = (props) => {
         <Grid container justify="center" alignItems="center">
             <Typography className={classes.typography} variant="h4">Filter Breeds</Typography>
             <Grid item container direction="column" justify="center" alignItems="center" spacing={1}>
-                <Grid container item direction="row" justify="center" alignItems="center" item xs={12} sm={12} md={12} lg={12} >
+                <Grid container item direction="row" justify="center" alignItems="center" xs={12} sm={12} md={12} lg={12} >
                     <Grid item>
                         <Filter reset={props.reset} updateFilters={props.updateFilters} stat={"Energy Level"} filter={"energy_level"} filters={filters} />
                     </Grid>

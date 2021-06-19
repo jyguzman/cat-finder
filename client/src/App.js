@@ -11,8 +11,7 @@ import SignIn from './components/SignIn';
 import SignOut from './components/SignOut';
 import ShowFavoritesCheckbox from './components/ShowFavoritesCheckbox';
 import SearchBar from './components/SearchBar';
-import { CircularProgress, makeStyles, Container, Divider, Typography, Grid, Paper } from '@material-ui/core';
-import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
+import { CircularProgress, makeStyles, Container, Divider, Typography, Grid } from '@material-ui/core';
 import { Route } from 'react-router-dom';
 import axios from 'axios';
 import firebase from 'firebase';
@@ -113,28 +112,6 @@ function App(props) {
     setLoading(false);
   }, []);
 
-  const filterCats = () => {
-    setLoading(true);
-      axios.get("/filter", {
-        params: {
-          grooming: filters["grooming"],
-          affection_level: filters['affection_level'],
-          energy_level: filters["energy_level"],
-          dog_friendly: filters["dog_friendly"],
-          child_friendly: filters['child_friendly'],
-          vocalisation: filters['vocalisation'],
-        }
-      })
-      .then(res => {
-        const namesOfFilteredCats = res.data.filtered_cats;
-        const list = qs.stringify(namesOfFilteredCats, {encode:false});
-        setFilteredCats(cats.filter(cat => list.includes(cat.name)));
-        
-      }).catch(err => console.log(err));
-      setLoading(false);
-      setPage(1);
-  }
-
   useEffect(() => {
     setLoading(true);
     axios.get("/filter", {
@@ -170,7 +147,7 @@ function App(props) {
         {loading ? <CircularProgress /> : <Container className={classes.breedCount}>
           <Grid container justify="space-between" alignItems="center">
             <Grid item><Typography>{filteredCats.length} cat breeds</Typography></Grid>
-            {user != null ? <Grid item><ShowFavoritesCheckbox handleShowFavorites={handleShowFavorites}/></Grid> : null}
+            <Grid item><ShowFavoritesCheckbox user={user} handleShowFavorites={handleShowFavorites}/></Grid>
           </Grid>
           <Divider />
           </Container>}

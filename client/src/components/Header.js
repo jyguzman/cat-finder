@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useMediaQuery, Grid, IconButton, Toolbar, makeStyles, AppBar, Typography, Tab, Tabs } from '@material-ui/core';
+import { useMediaQuery, IconButton, Toolbar, makeStyles, AppBar, Typography, Tab, Tabs } from '@material-ui/core';
 import { useHistory, useLocation } from 'react-router-dom';
 import NavMenu from "./NavMenu";
 import MenuIcon from "@material-ui/icons/Menu";

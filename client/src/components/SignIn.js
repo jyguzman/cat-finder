@@ -45,7 +45,7 @@ const SignIn = () => {
         <>
             <Paper elevation={4} className={classes.paper}>
                 <Typography variant="h5">Sign in to the Cat Repawsitory</Typography>
-                <Typography varitant="body2">to save your favorite cats and images.</Typography>
+                <Typography varitant="body2">to save your favorite cats.</Typography>
             </Paper>
             <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
         </>

@@ -1,13 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import firebase from 'firebase';
+import React, { useState } from 'react';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import { IconButton, Button} from "@material-ui/core";
+import { IconButton } from "@material-ui/core";
 
 
 const FavoriteButton = (props) => {
-    const db = firebase.firestore();
-    const cat = props.cat;
     const [filled, setFilled] = useState(false);
     const user = props.user;
 
