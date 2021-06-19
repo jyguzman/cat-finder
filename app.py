@@ -96,3 +96,6 @@ def get_images_by_category():
 @app.route("/gifs")
 def get_gifs_by_category():
     return api.get_category_gifs(request.args['category'])
+
+if __name__ == "__main__":
+    app.run()
