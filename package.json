@@ -23,6 +23,9 @@
   "cacheDirectories": [
     "client/node_modules"
   ],
+  "optionalDependencies": {
+    "fsevents": "^2.0.7"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
