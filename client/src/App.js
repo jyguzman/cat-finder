@@ -69,6 +69,10 @@ function App(props) {
     setShowFavorites(prev => !prev);
   }
 
+  const setFilled = () => {
+
+  }
+
   const perPage = 6;
   const [page, setPage] = useState(1);
 
@@ -155,7 +159,7 @@ function App(props) {
         {loading ? <CircularProgress /> : <Container className={classes.breedCount}>
           <Grid container justify="space-between" alignItems="center">
             <Grid item><Typography>{filteredCats.length} cat breeds</Typography></Grid>
-            <Grid item><ShowFavoritesCheckbox checked={showFavorites} user={user} handleShowFavorites={handleShowFavorites}/></Grid>
+            <Grid item><ShowFavoritesCheckbox showFavorites={showFavorites} user={user} handleShowFavorites={handleShowFavorites}/></Grid>
           </Grid>
           <Divider />
           </Container>}
