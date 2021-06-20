@@ -26,7 +26,7 @@ const CatCard = (props) => {
     const classes = useStyles();
     const cat = props.cat;
     const user = props.user;
-    const isFavorited = ((user != null) && props.favoriteBreeds.includes(cat.id));
+    const isFavorited = ((user != null) && (props.favoriteBreeds != null) && props.favoriteBreeds.includes(cat.id));
 
     const favorite = async () => {
         const ref = db.collection("Users").doc(user.email);
