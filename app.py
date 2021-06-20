@@ -6,7 +6,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import or_
 import sqlite3
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='client/build', static_url_path="/")
 api = CatAPI()
 
 def create_connection(db_file):
