@@ -17,7 +17,7 @@ const CatGallery = (props) => {
                 cats.slice((page - 1) * perPage, page * perPage)
                 .map((cat, index) => {
                     return (
-                        <CatCard user={user} favoriteBreeds={favoriteBreeds} cat={cat} key={index} />
+                        <CatCard user={user} updateFavorites={props.updateFavorites} favoriteBreeds={favoriteBreeds} cat={cat} key={index} />
                     )
                 })
             }

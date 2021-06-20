@@ -1,4 +1,4 @@
-import React  from 'react';
+import React, { useState }  from 'react';
 import firebase from 'firebase';
 import { Divider, Card, CardMedia, CardContent, CardActions, Grid, Typography, makeStyles } from '@material-ui/core';
 import LearnMoreButton from './LearnMoreButton';
@@ -27,7 +27,8 @@ const CatCard = (props) => {
     const cat = props.cat;
     const user = props.user;
     const isFavorited = ((user != null) && (props.favoriteBreeds != null) && props.favoriteBreeds.includes(cat.id));
-
+    //const [favState, setFavState] = useState(isFavorited);
+ 
     const favorite = async () => {
         const ref = db.collection("Users").doc(user.email);
         await ref.get().then((doc) => {
@@ -35,7 +36,8 @@ const CatCard = (props) => {
                 favBreeds: firebase.firestore.FieldValue.arrayUnion(cat.id)
             });
         })
-        .catch(err => console.log(err))
+        .catch(err => console.log(err));
+        props.updateFavorites();
     }
 
     const unfavorite = async () => {
@@ -45,7 +47,8 @@ const CatCard = (props) => {
                 favBreeds: firebase.firestore.FieldValue.arrayRemove(cat.id)
             });
         })
-        .catch(err => console.log(err))
+        .catch(err => console.log(err));
+        props.updateFavorites();
     }
 
     return (

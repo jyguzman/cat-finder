@@ -61,6 +61,10 @@ function App(props) {
     }).catch(err => console.log(err));
   };
 
+  const updateFavorites = () => {
+    if (user != null ) getFavoriteBreeds(user.email);
+  };
+
   const handleShowFavorites = () => {
     setShowFavorites(prev => !prev);
   }
@@ -112,7 +116,7 @@ function App(props) {
     setLoading(false);
   }, []);
 
-  useEffect(() => {
+  const filterCats = () => {
     setLoading(true);
     axios.get("/filter", {
       params: {
@@ -133,8 +137,12 @@ function App(props) {
       
     }).catch(err => console.log(err));
     setLoading(false);
+  }
+
+  useEffect(() => {
+    filterCats();
     setPage(1);
-}, [filters, showFavorites]);
+}, [filters, showFavorites, favoriteBreeds]);
 
   return (
     <Container className="App">
@@ -147,11 +155,11 @@ function App(props) {
         {loading ? <CircularProgress /> : <Container className={classes.breedCount}>
           <Grid container justify="space-between" alignItems="center">
             <Grid item><Typography>{filteredCats.length} cat breeds</Typography></Grid>
-            <Grid item><ShowFavoritesCheckbox user={user} handleShowFavorites={handleShowFavorites}/></Grid>
+            <Grid item><ShowFavoritesCheckbox checked={showFavorites} user={user} handleShowFavorites={handleShowFavorites}/></Grid>
           </Grid>
           <Divider />
           </Container>}
-        <CatGallery user={user} favoriteBreeds={favoriteBreeds} cats={filteredCats} page={page} perPage={perPage} />
+        <CatGallery user={user} updateFavorites={updateFavorites} favoriteBreeds={favoriteBreeds} cats={filteredCats} page={page} perPage={perPage} />
         <Paginator 
           page={page}
           pages={Math.ceil(filteredCats.length/perPage)}
