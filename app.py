@@ -6,7 +6,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import or_
 import sqlite3
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/', static_folder='client/build')
 api = CatAPI()
 
 def create_connection(db_file):
@@ -67,6 +67,9 @@ def filter_cats(filters):
         conn.close()
         return filtered_cats
 
+@app.route('/')
+def root():
+    return app.send_static_file('index.html')
 
 @app.route("/cats", methods=['GET'])
 def get_cats():
@@ -97,4 +100,5 @@ def get_images_by_category():
 def get_gifs_by_category():
     return api.get_category_gifs(request.args['category'])
 
-app.run()
+if __name__ == '__main__':
+    app.run()
