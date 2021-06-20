@@ -36,8 +36,11 @@ const SignIn = () => {
         signInFlow: 'redirect',
         signInSuccessUrl: '/signout',
         signInOptions: [
-                firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-                firebase.auth.EmailAuthProvider.PROVIDER_ID
+                    //firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+                    {
+                    provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
+                    requireDisplayName: false
+                    }
             ],
     };
 

@@ -31,10 +31,11 @@ const SignOut = () => {
             </Paper>
             <Grid container justify="center" spacing={4}>
                 <Grid item><Button color="secondary" variant="contained" onClick={() => {handleSignOut(); goToBreeds();}}>Sign Out</Button></Grid>
-                <Grid item><Button color="primary" variant="contained">Favorites</Button></Grid>
+                
             </Grid>
         </>
     );
 }
 
+/**<Grid item><Button color="primary" variant="contained">Favorites</Button></Grid> */
 export default SignOut;
