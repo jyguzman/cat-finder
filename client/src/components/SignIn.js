@@ -19,7 +19,7 @@ const SignIn = () => {
     const db = firebase.firestore();
     const history = useHistory();
     const addUser = async (email) => {
-        await db.collection("Users").doc(email).set( { "email": email, "favBreed": [], "favImages": [] } )
+        await db.collection("Users").doc(email).set( { "email": email, "favBreeds": [], "favImages": [] } )
     }
 
     const uiConfig = {
