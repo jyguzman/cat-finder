@@ -146,8 +146,11 @@ function App(props) {
 
   useEffect(() => {
     filterCats();
-    setPage(1);
 }, [filters, showFavorites, favoriteBreeds]);
+
+  useEffect(() => {
+    setPage(1);
+  }, [showFavorites]);
 
   return (
     <Container className="App">
