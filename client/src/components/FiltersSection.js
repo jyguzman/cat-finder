@@ -43,13 +43,13 @@ const FiltersSection = (props) => {
             <Grid item container direction="column" justify="center" alignItems="center" spacing={1}>
                 <Grid container item direction="row" justify="center" alignItems="center" xs={12} sm={12} md={12} lg={12} >
                     <Grid item>
-                        <Filter reset={props.reset} updateFilters={props.updateFilters} stat={"Energy Level"} filter={"energy_level"} filters={filters} />
+                        <Filter filterCats={props.filterCats} reset={props.reset} updateFilters={props.updateFilters} stat={"Energy Level"} filter={"energy_level"} filters={filters} />
                     </Grid>
                     <Grid item>
-                        <Filter reset={props.reset} updateFilters={props.updateFilters} stat={"Affection Level"} filter={"affection_level"} filters={filters} />
+                        <Filter filterCats={props.filterCats} reset={props.reset} updateFilters={props.updateFilters} stat={"Affection Level"} filter={"affection_level"} filters={filters} />
                     </Grid>
                     <Grid item>
-                        <Filter reset={props.reset} updateFilters={props.updateFilters} stat={"Grooming Requirements"} filter={"grooming"} filters={filters }/>
+                        <Filter filterCats={props.filterCats} reset={props.reset} updateFilters={props.updateFilters} stat={"Grooming Requirements"} filter={"grooming"} filters={filters }/>
                     </Grid>
                 </Grid>
 
@@ -61,13 +61,13 @@ const FiltersSection = (props) => {
                         <AccordionDetails>
                             <Grid container item direction="row" justify="center" alignItems="center" xs={12} sm={12} md={12} lg={12}>
                                 <Grid item >
-                                    <Filter reset={props.reset} updateFilters={props.updateFilters} stat={"Vocality"} filter={"vocalisation"} filters={filters} />
+                                    <Filter filterCats={props.filterCats} reset={props.reset} updateFilters={props.updateFilters} stat={"Vocality"} filter={"vocalisation"} filters={filters} />
                                 </Grid>
                                 <Grid item>
-                                    <Filter reset={props.reset} updateFilters={props.updateFilters} stat={"Friendliness with Children"} filter={"child_friendly"} filters={filters}  />
+                                    <Filter filterCats={props.filterCats} reset={props.reset} updateFilters={props.updateFilters} stat={"Friendliness with Children"} filter={"child_friendly"} filters={filters}  />
                                 </Grid>
                                 <Grid item>
-                                    <Filter reset={props.reset}  updateFilters={props.updateFilters} stat={"Friendliness with Dogs"} filter={"dog_friendly"} filters={filters} />
+                                    <Filter filterCats={props.filterCats} reset={props.reset}  updateFilters={props.updateFilters} stat={"Friendliness with Dogs"} filter={"dog_friendly"} filters={filters} />
                                 </Grid>
                             </Grid>
                         </AccordionDetails>

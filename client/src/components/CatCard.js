@@ -66,8 +66,8 @@ const CatCard = (props) => {
                 <CardActions>
                     <Grid container direction="row" justify="center" alignItems="center" spacing={4}>
                         <Grid item><LearnMoreButton cat={cat} /></Grid>
-                        {isFavorited ? <Grid item><UnfavoriteButton favorite={favorite} unfavorite={unfavorite} user={user} /></Grid> 
-                                    : <Grid item><FavoriteButton favorite={favorite} unfavorite={unfavorite} user={user} /></Grid>}
+                        {isFavorited ? <Grid item><UnfavoriteButton handleLike={props.handleLike} favorite={favorite} unfavorite={unfavorite} user={user} /></Grid> 
+                                    : <Grid item><FavoriteButton handleLike={props.handleLike} favorite={favorite} unfavorite={unfavorite} user={user} /></Grid>}
                     </Grid>
                 </CardActions>
             </Card>            

@@ -14,6 +14,7 @@ const UnfavoriteButton = (props) => {
         } else {
             props.unfavorite();
         }
+        props.handleLike();
     };
 
         return (

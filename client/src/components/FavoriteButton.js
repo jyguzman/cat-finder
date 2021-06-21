@@ -15,6 +15,7 @@ const FavoriteButton = (props) => {
         } else {
             props.favorite();
         }
+        props.handleLike();
     };
 
     return (

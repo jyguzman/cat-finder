@@ -35,6 +35,7 @@ function App(props) {
   const [favoriteBreeds, setFavoriteBreeds] = useState([]);
   const [favoriteImages, setFavoriteImages] = useState([]);
   const [showFavorites, setShowFavorites] = useState(false);
+  const [liked, setLiked] = useState(false);
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
@@ -65,13 +66,15 @@ function App(props) {
     if (user != null ) getFavoriteBreeds(user.email);
   };
 
+  const handleLike = () => {
+    setLiked(prev => !prev);
+  }
+
+
   const handleShowFavorites = () => {
     setShowFavorites(prev => !prev);
     getFavoriteBreeds(user.email);
-  }
-
-  const setFilled = () => {
-
+   // setPage(1);
   }
 
   const perPage = 6;
@@ -146,11 +149,16 @@ function App(props) {
 
   useEffect(() => {
     filterCats();
-}, [filters, showFavorites, favoriteBreeds]);
+  }, [filters, showFavorites, favoriteBreeds]);
 
   useEffect(() => {
     setPage(1);
   }, [showFavorites]);
+
+  useEffect(() => {
+    updateFavorites();
+    filterCats();
+  }, [liked]);
 
   return (
     <Container className="App">
@@ -159,7 +167,7 @@ function App(props) {
       <Route exact path="/">
         <FiltersSection filters={filters} updateFilters={updateFilters} 
           reset={Object.keys(filters).length === 0} 
-          resetFilters={resetFilters}/>
+          resetFilters={resetFilters} filterCats={filterCats}/>
         {loading ? <CircularProgress /> : <Container className={classes.breedCount}>
           <Grid container justify="space-between" alignItems="center">
             <Grid item><Typography>{filteredCats.length} cat breeds</Typography></Grid>
@@ -167,7 +175,7 @@ function App(props) {
           </Grid>
           <Divider />
           </Container>}
-        <CatGallery user={user} updateFavorites={updateFavorites} favoriteBreeds={favoriteBreeds} cats={filteredCats} page={page} perPage={perPage} />
+        <CatGallery handleLike={handleLike} user={user} updateFavorites={updateFavorites} favoriteBreeds={favoriteBreeds} cats={filteredCats} page={page} perPage={perPage} />
         <Paginator 
           page={page}
           pages={Math.ceil(filteredCats.length/perPage)}
