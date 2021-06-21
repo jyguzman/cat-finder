@@ -119,7 +119,7 @@ function App(props) {
     
     getCats();
     setLoading(false);
-  }, []);
+  }, [user]);
 
   const filterCats = () => {
     setLoading(true);
