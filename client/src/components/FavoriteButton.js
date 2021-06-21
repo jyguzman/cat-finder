@@ -8,7 +8,8 @@ const FavoriteButton = (props) => {
     const [filled, setFilled] = useState(false);
     const user = props.user;
 
-    const handleClick = async () => {
+    const handleClick = () => {
+        setFilled(prev => !prev);
         if (filled) {
             props.unfavorite();
         } else {
@@ -17,7 +18,7 @@ const FavoriteButton = (props) => {
     };
 
     return (
-            user != null ? <IconButton onClick={() => {handleClick(); setFilled(prev => !prev);}}>
+            user != null ? <IconButton onClick={() => {handleClick(); }}>
                 {filled ? <FavoriteIcon /> : <FavoriteBorderIcon />}
             </IconButton> : null
         );

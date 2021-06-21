@@ -67,6 +67,7 @@ function App(props) {
 
   const handleShowFavorites = () => {
     setShowFavorites(prev => !prev);
+    getFavoriteBreeds(user.email);
   }
 
   const setFilled = () => {
