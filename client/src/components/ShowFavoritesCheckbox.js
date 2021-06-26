@@ -14,14 +14,6 @@ const ShowFavoritesCheckbox= (props) => {
             
             </IconButton> : null
     );
-    /*return (
-        user != null ? <FormControlLabel
-            checked={checked}
-            onChange={() => { props.handleShowFavorites(); setChecked(prev => !prev); }}
-            control={<Checkbox icon={<FavoriteBorder />} checkedIcon={<Favorite />} name="checkedH" />}
-            label="Include Only Favorites"
-        /> : null
-    );*/
 }
 
 export default ShowFavoritesCheckbox;

@@ -1,5 +1,5 @@
 # Welcome to CatFinder!
 
-Search from over 60 different breeds of cats by name or by filters.
+Search from over 60 different breeds of cats and hundreds of images.
 
-(To be done: Sign up or log in to save your favorite images and gifs)
+Link to application: https://cat-repawsitory.herokuapp.com/
